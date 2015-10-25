@@ -34,6 +34,7 @@ g_s_values <- function(x, R2_bounds){
 # Main function - sValues -------------------------------------------------
 
 
+
 ##' S-values: conventional model ambiguity measures
 ##' 
 ##' @description 
@@ -41,8 +42,10 @@ g_s_values <- function(x, R2_bounds){
 ##' discussed in Leamer (2015). 
 ##' For further details see the package vignette. 
 ##'
-##' @param ... arguments passed to other methods.
-##'  
+##' @param ... arguments passed to other methods. The first argument should be a \code{formula} followed by a \code{data.frame};
+##' alternatively, as a shortcut, you can omit the \code{formula} and provide only a \code{matrix} or 
+##' a \code{data.frame}: in that case, the function will automatically consider the first column as the dependent variable 
+##' and the rest as the independent variables.
 ##' @return 
 ##' \code{sValues} returns an object a list of class "sValues" containing the main results of the analysis:
 ##' 
@@ -111,36 +114,13 @@ g_s_values <- function(x, R2_bounds){
 ##' 
 ##' @export
 ### sValues ###
-sValues <- function(...){
+sValues <- function(..., R2_bounds = c(0.1, 0.5, 1), 
+                    favorites = NULL, R2_favorites = NULL, scale = TRUE){
   UseMethod("sValues")
 }
 
-##' @param m an object of class \code{\link{matrix}} with the dependent variable as the first column followed by the covariates. 
-##' The matrix must have column names.
-##' @export
-##' @name sValues
-sValues.matrix <- function(m, ...){
-  if(!length(colnames(m)>0)) stop("Matrix must have column names!")
-  df <- as.data.frame(m)
-  res <- sValues(df, ...)
-  res$info$data <- deparse(substitute(m))
-  res
-}
-
-##' @param df an object of class \code{\link{data.frame}} with the dependent variable as the first column followed by the covariates.
-##' @export
-##' @name sValues
-##' @importFrom stats as.formula
-sValues.data.frame <- function(df, ...){
-  formula <- as.formula(paste(names(df)[1], "~ ."))
-  res <- sValues(formula = formula, data = df, ...)
-  res$info$data <- deparse(substitute(df))
-  res
-}
-
-
-##' @param formula an object of the class \code{\link{formula}}: a symbolic description of the model to be fitted.
-##' @param data Needed when you pass a formula as first parameter. An object of the class \code{\link{data.frame}} containing the variables used in the analysis. 
+##' @param formula an object of the class \code{\link{formula}}: a symbolic description of the model to be fitted. 
+##' @param data needed only when you pass a formula as first parameter. An object of the class \code{\link{data.frame}} containing the variables used in the analysis. 
 ##' @param R2_bounds a numeric vector with two or more R2 bounds to be considered in the analysis. The default values are
 ##'  \code{c(0.1, 0.5, 1)}, proposed by Leamer (2014).
 ##' @param favorites \emph{optional} - a character vector that specifies the "favorite" varibles to be used in the analysis.
@@ -152,7 +132,7 @@ sValues.data.frame <- function(df, ...){
 ##' @name sValues
 ##' @importFrom stats lm
 sValues.formula <- function(formula, data, R2_bounds = c(0.1, 0.5, 1), 
-                    favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
+                            favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
   
   stopifnot(class(formula)=="formula",
             class(data) == "data.frame",
@@ -185,7 +165,7 @@ sValues.formula <- function(formula, data, R2_bounds = c(0.1, 0.5, 1),
   
   
   #-- model matrix and scale data --#
-  new_df                 <- model_matrix_scale(formula, data, scale = scale)
+  new_df                 <- model_frame_scale(formula, data, scale = scale)
   
   #-- ols simple --#
   singles_formula        <- lapply(names(new_df)[-1],  function(i) formula(new_df[c(deparse(formula[[2]]),i)]))
@@ -223,6 +203,38 @@ sValues.formula <- function(formula, data, R2_bounds = c(0.1, 0.5, 1),
   
   return(ret)
 }
+
+
+
+##' @param m an object of class \code{\link{matrix}} with the dependent variable in the first column 
+##' followed by the covariates. 
+##' The matrix must have column names.
+##' @export
+##' @name sValues
+sValues.matrix <- function(m, R2_bounds = c(0.1, 0.5, 1), 
+                           favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
+  if(!length(colnames(m)>0)) stop("Matrix must have column names!")
+  df <- as.data.frame(m)
+  res <- sValues(df, R2_bounds = R2_bounds, favorites = favorites, 
+                 R2_favorites = R2_favorites, scale = scale)
+  res$info$data <- deparse(substitute(m))
+  res
+}
+
+##' @param df an object of class \code{\link{data.frame}} with the dependent variable in the first column 
+##' followed by the covariates.
+##' @export
+##' @name sValues
+##' @importFrom stats as.formula
+sValues.data.frame <- function(df, R2_bounds = c(0.1, 0.5, 1), 
+                               favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
+  formula <- as.formula(paste(names(df)[1], "~ ."))
+  res <- sValues(formula = formula, data = df, R2_bounds = R2_bounds, 
+                 favorites = favorites, R2_favorites = R2_favorites, scale = scale)
+  res$info$data <- deparse(substitute(df))
+  res
+}
+
 
 
 

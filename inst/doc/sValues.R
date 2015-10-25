@@ -20,9 +20,6 @@ full_table[1:5, 1:5] # showing only first five columns and rows
 just_svalues <- coef(eg, type = "s_values")
 just_svalues[1:5, ] # showing only first five rows
 
-# print(eg, coef = "extreme_bounds", 
-#       type = "latex", variables = c("GOVNOM1", "IPRICE1"))
-
 ## ------------------------------------------------------------------------
 extreme_bounds(eg)[c("GOVNOM1", "IPRICE1"),
                    c("R2_0.5_1.low", "R2_0.5_1.up")]
