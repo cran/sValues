@@ -50,7 +50,7 @@ g_s_values <- function(x, R2_bounds){
 ##' \code{sValues} returns an object a list of class "sValues" containing the main results of the analysis:
 ##' 
 ##' \itemize{ 
-##' \item \code{info}: a \code{list} with the general information about the paramaters used in the analysis, such as the 
+##' \item \code{info}: a \code{list} with the general information about the parameters used in the analysis, such as the 
 ##' formula, the data, the bounds and favorite variables.
 ##' 
 ##' \item \code{simple}: a \code{list} with the results of the simple linear regressions for each variable.
@@ -123,7 +123,7 @@ sValues <- function(..., R2_bounds = c(0.1, 0.5, 1),
 ##' @param data needed only when you pass a formula as first parameter. An object of the class \code{\link{data.frame}} containing the variables used in the analysis. 
 ##' @param R2_bounds a numeric vector with two or more R2 bounds to be considered in the analysis. The default values are
 ##'  \code{c(0.1, 0.5, 1)}, proposed by Leamer (2014).
-##' @param favorites \emph{optional} - a character vector that specifies the "favorite" varibles to be used in the analysis.
+##' @param favorites \emph{optional} - a character vector that specifies the "favorite" variables to be used in the analysis.
 ##' These variables will have different lower and upper R2 bounds as defined in the \code{R_favorites} argument.
 ##' @param R2_favorites \emph{optional} - a numeric vector with two or more R2 bounds for the "favorite" variables.
 ##' @param scale should the variables be scaled/standardized to zero mean and unit variance? 
@@ -341,8 +341,9 @@ extreme_bounds <- function(object){
 
 
 
-##' Succinct display of S-values results.
+##' @title Succinct display of S-values results.
 ##'  
+##' @description 
 ##' Succinct display of S-values results.
 ##' 
 ##' @param x an object of class \code{\link{sValues}}.
@@ -350,7 +351,7 @@ extreme_bounds <- function(object){
 ##' @param print.length how many variables to show in the screen?
 ##' This is used for pretty printing. The default is 6.
 ##' 
-##'  @return 
+##' @return 
 ##'  \code{NULL}
 ##'  
 ##' @examples 
@@ -451,11 +452,11 @@ summary.sValues <- function(object, ...){
 ##' @param type the type of the plot. Current options are \emph{t_s_plot} which returns
 ##' a scatterplot of s-values vs t-values for all coefficients and \emph{beta_plot} which returns
 ##' a plot of the different estimates for the coefficients. 
-##' @param ... aditional arguments to be passed to the plot functions. See details.
+##' @param ... additional arguments to be passed to the plot functions. See details.
 ##' 
 ##' @details 
 ##' 
-##' Addional arguments:
+##' Additional arguments:
 ##' 
 ##' \code{t_s_plot} 
 ##' \itemize{
@@ -527,10 +528,10 @@ beta_plot <- function(x, variables = "all", error_bar = FALSE, ext_bounds_shades
   betas <- .melt.coef(x, "betas")
   
   t_values <- .melt.coef(x, "t_values")
+  t_values <- t_values["t_values"]
   
-  ext_bounds <-coef(x, "extreme_bounds")
-  ext_bounds$coefficients <- row.names(ext_bounds)
-  ext_bounds<- do.call("rbind", replicate(ncol(coef(x, "betas")), ext_bounds, simplify = FALSE))
+  ext_bounds <- coef(x, "extreme_bounds")
+  ext_bounds <- do.call("rbind", replicate(ncol(coef(x, "betas")), ext_bounds, simplify = FALSE))
   
   melted <- cbind(betas, t_values, ext_bounds)
   
@@ -540,7 +541,7 @@ beta_plot <- function(x, variables = "all", error_bar = FALSE, ext_bounds_shades
   }
   
   p <- ggplot(melted, aes(variable, betas, group=coefficients)) + 
-    geom_line(aes(variable, betas, group=coefficients), col = "transparent")
+    geom_line(aes(variable, betas, group = coefficients), col = "transparent")
   
   if(ext_bounds_shades){
     names <- grep("^R2", names(melted), value = TRUE)
