@@ -1,7 +1,7 @@
-8043da5c2077235ac85333e05c6d77ae *DESCRIPTION
-36d8fc8ccecf62232cfad27f3c82303b *NAMESPACE
+67e37ef251ea2185a846974ed61573da *DESCRIPTION
+569f23f016650e1d519c57c31f8e748d *NAMESPACE
 6678e600fb314e8ec4a7b9709cd4ee18 *R/data_documentation.R
-b1ed35b89c69624587870c885c703205 *R/internal_functions.R
+e8ed88df18925ada4f554fce8dd4bb54 *R/internal_functions.R
 1d9fa02bb8a42f3cb0591637ccf31efe *R/package_documentation.R
 a43b030479fb8017bd309d22ef6a6b19 *R/sValues.R
 f6ff32ba5b7967d5df3cf5479ee4d03b *build/vignette.rds
@@ -10,7 +10,7 @@ f6ff32ba5b7967d5df3cf5479ee4d03b *build/vignette.rds
 a5c0b0ed40f8c216a11c1f1d7bef9c2a *data/economic_growth_sala_i_martin.rda
 eef7ad3bd753daa32b0dacd70ee97de0 *inst/doc/sValues.R
 05281f2bbaf009010139cf04b1454b1c *inst/doc/sValues.Rnw
-54469861d896394b970d616362b67230 *inst/doc/sValues.pdf
+0333890ab518dd123385783a19dfad89 *inst/doc/sValues.pdf
 2f407a407e97d8926947e757405cc764 *man/coef.sValues.Rd
 70d00f0fbe11e1ce954f8193a25a7d92 *man/economic_growth.Rd
 1cc837304e790a12af80f121b0caffab *man/plot.sValues.Rd
