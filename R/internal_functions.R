@@ -74,7 +74,8 @@ r2_combs <- function(R2_bounds){
 ##' @importFrom stats vcov
 .bayes <- function(ols, prior_R2, favorites = NULL, R2_favorites = NULL){
   
-  if(class(ols)!= "lm") stop("ols must be an object of class 'lm'")
+  if (! inherits(ols, "lm")) stop("ols must be an object of class 'lm'")
+  
   
   #--- prior variance
   V <- .priorVar(prior_R2, ols, favorites, R2_favorites)

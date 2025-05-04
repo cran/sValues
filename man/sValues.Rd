@@ -2,25 +2,46 @@
 % Please edit documentation in R/sValues.R
 \name{sValues}
 \alias{sValues}
-\alias{sValues}
 \alias{sValues.formula}
-\alias{sValues}
 \alias{sValues.matrix}
-\alias{sValues}
 \alias{sValues.data.frame}
 \title{S-values: conventional model ambiguity measures}
 \usage{
-sValues(..., R2_bounds = c(0.1, 0.5, 1), favorites = NULL,
-  R2_favorites = NULL, scale = TRUE)
+sValues(
+  ...,
+  R2_bounds = c(0.1, 0.5, 1),
+  favorites = NULL,
+  R2_favorites = NULL,
+  scale = TRUE
+)
 
-\method{sValues}{formula}(formula, data, R2_bounds = c(0.1, 0.5, 1),
-  favorites = NULL, R2_favorites = NULL, scale = TRUE, ...)
+\method{sValues}{formula}(
+  formula,
+  data,
+  R2_bounds = c(0.1, 0.5, 1),
+  favorites = NULL,
+  R2_favorites = NULL,
+  scale = TRUE,
+  ...
+)
 
-\method{sValues}{matrix}(m, R2_bounds = c(0.1, 0.5, 1), favorites = NULL,
-  R2_favorites = NULL, scale = TRUE, ...)
+\method{sValues}{matrix}(
+  m,
+  R2_bounds = c(0.1, 0.5, 1),
+  favorites = NULL,
+  R2_favorites = NULL,
+  scale = TRUE,
+  ...
+)
 
-\method{sValues}{data.frame}(df, R2_bounds = c(0.1, 0.5, 1),
-  favorites = NULL, R2_favorites = NULL, scale = TRUE, ...)
+\method{sValues}{data.frame}(
+  df,
+  R2_bounds = c(0.1, 0.5, 1),
+  favorites = NULL,
+  R2_favorites = NULL,
+  scale = TRUE,
+  ...
+)
 }
 \arguments{
 \item{...}{arguments passed to other methods. The first argument should be a \code{formula} followed by a \code{data.frame};

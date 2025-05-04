@@ -16,7 +16,7 @@ a plot of the different estimates for the coefficients.}
 \item{...}{additional arguments to be passed to the plot functions. See details.}
 }
 \value{
-It returns a \code{\link{ggplot}} object with the requested plot.
+It returns a \code{ggplot} object with the requested plot.
 }
 \description{
 Plot methods for objects of the class \code{\link{sValues}}.

@@ -2,13 +2,9 @@
 % Please edit documentation in R/sValues.R
 \name{coef.sValues}
 \alias{coef.sValues}
-\alias{coef.sValues}
 \alias{betas}
-\alias{coef.sValues}
 \alias{t_values}
-\alias{coef.sValues}
 \alias{s_values}
-\alias{coef.sValues}
 \alias{extreme_bounds}
 \title{Extract sValues Model Coefficients/Statistics}
 \usage{

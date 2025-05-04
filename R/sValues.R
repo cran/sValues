@@ -8,7 +8,7 @@ utils::globalVariables(c("variable", "coefficients"))
 # Z/Chi s-values (to be added)
 ##' @importFrom stats setNames coef
 zChi <- function(x){
-  if(class(x) != "sValues") stop("Object must be of class 'sValues'")
+  if (! inherits(x, "sValues"))   stop("Object must be of class 'sValues'")
   z   <- coef(x)[, "t_ols_all"]
   chi <- sqrt(Reduce("*", summary(x$all)$fstatistic[c("value", "numdf")]))
   setNames(z/chi, row.names(coef(x)))
@@ -16,7 +16,7 @@ zChi <- function(x){
 
 # g-prior svalue (to be added)
 g_s_values <- function(x, R2_bounds){
-  if(class(x) != "sValues") stop("Object must be of class 'sValues'")
+  if (! inherits(x, "sValues"))   stop("Object must be of class 'sValues'")
   zchi <- zChi(x)
   
   r1  <- min(R2_bounds)
@@ -134,8 +134,11 @@ sValues <- function(..., R2_bounds = c(0.1, 0.5, 1),
 sValues.formula <- function(formula, data, R2_bounds = c(0.1, 0.5, 1), 
                             favorites = NULL, R2_favorites = NULL, scale = TRUE, ...){
   
-  stopifnot(class(formula)=="formula",
-            class(data) == "data.frame",
+  # stopifnot(class(formula)=="formula",
+  #           class(data) == "data.frame",
+  #           length(R2_bounds) >= 2)
+  stopifnot(inherits(formula, "formula"), 
+            inherits(data, "data.frame"), 
             length(R2_bounds) >= 2)
   
   if(!is.null(R2_favorites) && length(R2_bounds) != length(R2_favorites))
@@ -293,7 +296,9 @@ coef.sValues <- function(object, type = "default", ...){
 ##' @export
 ##' @name coef.sValues
 betas <- function(object){
-  if(class(object) != "sValues") stop("Object must be of class 'sValues'")
+  
+  if (! inherits(object, "sValues")) stop("Object must be of class 'sValues'")
+  
   #simple
   s <- do.call("rbind", lapply(object$simple, function(object) object$coefficients[-1]))
   # bayes
@@ -309,7 +314,9 @@ betas <- function(object){
 ##' @name coef.sValues
 ##' @importFrom stats coef
 t_values <- function(object){
-  if(class(object) != "sValues") stop("Object must be of class 'sValues'")
+  
+  if (! inherits(object, "sValues")) stop("Object must be of class 'sValues'")
+  
   #simple
   st <- do.call("rbind", lapply(object$simple, function(object) coef(summary(object))[-1,"t value"]))
   #bayes
@@ -324,7 +331,9 @@ t_values <- function(object){
 ##' @export
 ##' @name coef.sValues
 s_values <- function(object){
-  if(class(object) != "sValues") stop("Object must be of class 'sValues'")
+  
+  if (! inherits(object, "sValues")) stop("Object must be of class 'sValues'")
+  
   object$s_values
 }
 
@@ -332,7 +341,9 @@ s_values <- function(object){
 ##' @export
 ##' @name coef.sValues
 extreme_bounds <- function(object){
-  if(class(object) != "sValues") stop("Object must be of class 'sValues'")
+  
+  if (! inherits(object, "sValues")) stop("Object must be of class 'sValues'")
+  
   do.call("cbind", object$ext_bounds)
 }
 
@@ -471,7 +482,7 @@ summary.sValues <- function(object, ...){
 ##' }
 ##' 
 ##' @return 
-##' It returns a \code{\link{ggplot}} object with the requested plot.
+##' It returns a \code{ggplot} object with the requested plot.
 ##' 
 ##' @examples
 ##' # growth regressions example

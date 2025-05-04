@@ -45,7 +45,7 @@ So how can we tackle that problem? This presentation will introduce the \texttt{
 \section{S-Values: measures of the sturdiness of regression coefficients}
 \subsection{Extreme bounds for the coefficients}
 
-The different estimates for Government GDP Share can be interpreted as the result of \emph{different strong prior beliefs}: the coefficients of the \emph{ommited} variables are \emph{exactly zero}, whereas, for the ones \emph{included} in the model, \emph{we believe whatever the data says}. This suggests that a Bayesian approach could be useful to model this problem. Consider the linear model $y = X\beta + \epsilon$ where $\epsilon \sim N(0, \sigma^2 I)$ and $\beta \sim N(0, V)$. The OLS estimate of $\beta$ is $b = (X'X)^{-1}X'y$ with precision matrix $H =(X'X)/\sigma^{2}$. Then, the posterior mean of $\beta$ is: 
+The different estimates for Government GDP Share can be interpreted as the result of \emph{different strong prior beliefs}: the coefficients of the \emph{omitted} variables are \emph{exactly zero}, whereas, for the ones \emph{included} in the model, \emph{we believe whatever the data says}. This suggests that a Bayesian approach could be useful to model this problem. Consider the linear model $y = X\beta + \epsilon$ where $\epsilon \sim N(0, \sigma^2 I)$ and $\beta \sim N(0, V)$. The OLS estimate of $\beta$ is $b = (X'X)^{-1}X'y$ with precision matrix $H =(X'X)/\sigma^{2}$. Then, the posterior mean of $\beta$ is: 
 
 \begin{equation}
 \hat{\beta}(V) = (H + V^{-1})^{-1}Hb
@@ -155,7 +155,7 @@ plot(eg, type = "beta_plot", variables = "GOVNOM1",
      error_bar = TRUE, ext_bounds_shades = TRUE)
 @
 
-The \texttt{sValues} function allows you to define some of the variables as ``favorites'' with larger prior variances. In that case, you need to specify a \texttt{favorites} paramater - with the names of the favorite variables - and a \texttt{R2\_favorites} parameter with the $R^2$ bounds for the favorite variables. For example, the code below reproduces the favorite variables chosen in Leamer\cite{Leamer2014}:
+The \texttt{sValues} function allows you to define some of the variables as ``favorites'' with larger prior variances. In that case, you need to specify a \texttt{favorites} parameter - with the names of the favorite variables - and a \texttt{R2\_favorites} parameter with the $R^2$ bounds for the favorite variables. For example, the code below reproduces the favorite variables chosen in Leamer\cite{Leamer2014}:
 
 <<size = 'small'>>=
 favorites <- c("GDPCH60L", "OTHFRAC", "ABSLATIT", 
@@ -179,7 +179,7 @@ We need more tools that help us study the sensitivity of our inferences and help
 %	REFERENCES
 %----------------------------------------------------------------------------------------
 
-\bibliographystyle{acm}
+\bibliographystyle{plain}
 \bibliography{references} 
 
 \end{document}

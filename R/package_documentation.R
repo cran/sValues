@@ -19,6 +19,5 @@
 ##' 
 ##' Leamer, E. (2015). S-values and bayesian weighted all-subsets regressions. European Economic Review.
 ##' 
-##'@docType package
 ##'@name sValues-package
-NULL
+"_PACKAGE"

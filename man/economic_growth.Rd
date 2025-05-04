@@ -3,12 +3,16 @@
 \docType{data}
 \name{economic_growth}
 \alias{economic_growth}
-\alias{economic_growth}
 \alias{economic_growth_original}
-\alias{economic_growth}
 \alias{economic_growth_sala_i_martin}
 \title{Economic Growth data}
-\format{An object of class \code{data.frame} with 87 rows and 68 columns.}
+\format{
+An object of class \code{data.frame} with 87 rows and 68 columns.
+
+An object of class \code{data.frame} with 139 rows and 68 columns.
+
+An object of class \code{data.frame} with 88 rows and 68 columns.
+}
 \usage{
 economic_growth
 
